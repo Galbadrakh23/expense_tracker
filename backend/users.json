@@ -1,0 +1,25 @@
+{
+  "employees": [
+    {
+      "eid": "1",
+      "firstname": "Tony",
+      "lastname": "Stark",
+      "email": "tony@starkindustries.com",
+      "position": "Enterperneur"
+    },
+    {
+      "eid": "2",
+      "firstname": "Steve",
+      "lastname": "Rogers",
+      "email": "captian@usamilitary.com",
+      "position": "Captian"
+    },
+    {
+      "eid": "3",
+      "firstname": "Bruce",
+      "lastname": "Banner",
+      "email": "doc@researcher.com",
+      "position": "Doctor"
+    }
+  ]
+}
