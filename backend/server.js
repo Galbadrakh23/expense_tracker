@@ -4,6 +4,7 @@ dotenv.config();
 
 const { logger } = require("./middlewares/logger");
 const userRoutes = require("./routes/user-route");
+const categoriesRoutes = require("./routes/categories-route");
 
 const PORT = process.env.PORT;
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(logger());
 
 app.use("/users", userRoutes);
+app.use("/categories", categoriesRoutes);
 
 app.get("/user", (req, res) => {
   console.log("all user is read successfully");
