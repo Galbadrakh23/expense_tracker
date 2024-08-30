@@ -17,23 +17,6 @@ app.use(logger());
 app.use("/users", userRoutes);
 app.use("/categories", categoriesRoutes);
 
-app.get("/user", (req, res) => {
-  console.log("all user is read successfully");
-  res.json({ message: "GET success" });
-});
-
-app.post("/user", (req, res) => {
-  console.log("New user is created successfully");
-});
-
-app.put("/user", (req, res) => {
-  console.log("user is updated successfully");
-});
-
-app.delete("/user", (req, res) => {
-  console.log("user is deleted successfully");
-});
-
 app.listen(PORT, () => {
-  console.log(`Сервер Localhost:${PORT}дээр аслаа`);
+  console.log(`Сервер Localhost:${PORT} дээр аслаа`);
 });
