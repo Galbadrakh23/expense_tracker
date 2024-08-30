@@ -6,13 +6,13 @@ const getAllUser = async (req, res) => {
   res.status(200).json({ message: "Амжилттай", user: data });
 };
 const createUser = async (req, res) => {
-  const { name, password, profile_img, createdat } = req.body;
+  const { email, name, password, profile_img } = req.body;
 
   try {
     const data = await sql`
-      INSERT INTO users (name, password, profile_img, createdat)
-      VALUES (${name}, ${password}, ${profile_img}, ${createdat})
-      RETURNING *
+      INSERT INTO users (email, name, password, profile_img )
+      VALUES ( ${email}, ${name}, ${password}, ${profile_img} )
+      RETURNING *;
     `;
     res.status(201).json({ message: "Create success", user: data[0] });
   } catch (error) {
@@ -23,12 +23,12 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   const { id } = req.params;
-  const { firstname, lastname, email, position } = req.body;
+  const { email, name, password } = req.body;
   const data = await sql`
     UPDATE users
-    SET firstname = ${firstname}, lastname = ${lastname}, email = ${email}, position = ${position}
-    WHERE eid = ${id}
-    RETURNING *
+    SET email = ${email}, name = ${name}, password = ${password}
+    WHERE id = ${id}
+    RETURNING *;
   `;
   console.log("DATA", data);
   res.status(200).json({ message: "Update success", user: data[0] });

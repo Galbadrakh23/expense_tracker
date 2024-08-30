@@ -5,23 +5,35 @@ const getAllCategories = async (req, res) => {
   console.log("DATA", data);
   res.status(200).json({ message: "success", categories: data });
 };
-
 const createCategories = async (req, res) => {
   const { name, description } = req.body;
-  const data = await sql`
+  try {
+    const data = await sql`
     INSERT INTO categories (name, description)
     VALUES (${name}, ${description})
-    RETURNING *
+    RETURNING *;
+  `;
+    console.log("DATA", data);
+    res.status(201).json({ message: "Created", categories: data[0] });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Create failed", error });
+  }
+};
+const updateCategories = async (req, res) => {
+  const { name, description } = req.body;
+  const data = await sql`
+  UPDATE categories
+  SET name =${name}, description =${description}
+  WHERE id = ${id}
+  RETURNING *;
   `;
   console.log("DATA", data);
-  res.status(201).json({ message: "Created", category: data[0] });
+  res.status(200).json({ message: "Update success", categories: data[0] });
 };
-
-const updateCategories = () => {};
-
 const deleteCategories = async (req, res) => {
   const { id } = req.params;
-  const data = await sql`DELETE FROM categories WHERE eid=${id}`;
+  const data = await sql`DELETE FROM categories WHERE id=${id}`;
   console.log("DATA", data);
   res.status(200).json({ message: "Delete success", categories: data });
 };
