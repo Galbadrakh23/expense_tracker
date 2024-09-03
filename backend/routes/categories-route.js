@@ -5,11 +5,13 @@ const {
   updateCategories,
   deleteCategories,
 } = require("../controllers/categories-controller");
+const { auth } = require("../middlewares/auth");
 
 const router = Router();
 
-router.route("/").get(getAllCategories);
-router.route("/").post(createCategories);
+router.route("/").get(auth, getAllCategories);
+router.route("/").post(auth, createCategories);
+
 router.route("/:id").put(updateCategories);
 router.route("/:id").delete(deleteCategories);
 

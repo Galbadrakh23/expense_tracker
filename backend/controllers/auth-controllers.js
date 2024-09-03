@@ -21,7 +21,6 @@ const signUp = async (req, res) => {
 };
 
 const signIn = async (req, res) => {
-  const { id } = req.params;
   const { email, password } = req.body;
   const [user] = await sql`
     SELECT * FROM users WHERE email = ${email}
@@ -33,7 +32,7 @@ const signIn = async (req, res) => {
     if (!isCheck) {
       res.status(400).json({ message: "Password incorrect" });
     } else {
-      const token = jwt.sign({ id: user.id }, "JWT_SECRET", {
+      const token = jwt.sign({ id: user.id }, "JWT_TOKEN_PASS@123", {
         expiresIn: "24h",
       });
 
