@@ -5,7 +5,7 @@ const AboutLayout = ({ children }) => {
     <div>
       AboutLayout
       {children}
-      Footer
+      footer
     </div>
   );
 };
