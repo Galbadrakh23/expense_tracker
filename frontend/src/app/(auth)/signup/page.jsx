@@ -6,7 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { apiUrl } from "@/utils/util";
+// import { apiUrl } from "@/utils/util";
 
 const SignUp = () => {
   const router = useRouter();
@@ -71,57 +71,62 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen gap-10">
-      <Image src="./logo.svg" width={90} height={25} alt="Logo" />
-      <h2>Create Geld account</h2>
-      <div className="flex flex-col gap-4">
-        <input
-          type="text"
-          placeholder="Name"
-          className="w-full max-w-xs input input-bordered"
-          value={userData.name}
-          onChange={(e) => setUserData({ ...userData, name: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Email"
-          className="w-full max-w-xs input input-bordered"
-          value={userData.email}
-          onChange={(e) => setUserData({ ...userData, email: e.target.value })}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full max-w-xs input input-bordered"
-          value={userData.password}
-          onChange={(e) =>
-            setUserData({ ...userData, password: e.target.value })
-          }
-        />
-        <input
-          type="password"
-          placeholder="Re-password"
-          className="w-full max-w-xs input input-bordered"
-          value={userData.repassword}
-          onChange={(e) =>
-            setUserData({ ...userData, repassword: e.target.value })
-          }
-        />
-        {/* <input
+    <div className="flex flex-row">
+      <div className="flex flex-col items-center justify-center w-1/2 h-screen gap-10">
+        <Image src="./logo.svg" width={90} height={25} alt="Logo" />
+        <h2>Create Geld account</h2>
+        <div className="flex flex-col gap-4">
+          <input
+            type="text"
+            placeholder="Name"
+            className="w-full max-w-xs input input-bordered"
+            value={userData.name}
+            onChange={(e) => setUserData({ ...userData, name: e.target.value })}
+          />
+          <input
+            type="text"
+            placeholder="Email"
+            className="w-full max-w-xs input input-bordered"
+            value={userData.email}
+            onChange={(e) =>
+              setUserData({ ...userData, email: e.target.value })
+            }
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full max-w-xs input input-bordered"
+            value={userData.password}
+            onChange={(e) =>
+              setUserData({ ...userData, password: e.target.value })
+            }
+          />
+          <input
+            type="password"
+            placeholder="Re-password"
+            className="w-full max-w-xs input input-bordered"
+            value={userData.repassword}
+            onChange={(e) =>
+              setUserData({ ...userData, repassword: e.target.value })
+            }
+          />
+          {/* <input
           type="file"
           onChange={(e) => setImage(e.target.files[0])}
           className="w-full max-w-xs input input-bordered"
         /> */}
-        <button className="btn bg-[#0166FF] text-white " onClick={signUp}>
-          Sign Up
-        </button>
+          <button className="btn bg-[#0166FF] text-white " onClick={signUp}>
+            Sign Up
+          </button>
+        </div>
+        <div>
+          <span>Already have account?</span>
+          <Link href="/login">
+            <button className="btn btn-link">Log in</button>
+          </Link>
+        </div>
       </div>
-      <div>
-        <span>Already have account?</span>
-        <Link href="/login">
-          <button className="btn btn-link">Log in</button>
-        </Link>
-      </div>
+      <div className="w-1/2 h-screen bg-[#0166FF]"></div>
     </div>
   );
 };

@@ -38,37 +38,42 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen gap-10">
-      <Image src="./logo.svg" width={90} height={25} alt="Logo" />
-      <h2>Welcome Back</h2>
-      <div className="flex flex-col gap-4">
-        <input
-          type="text"
-          placeholder="Email"
-          className="w-full max-w-xs input input-bordered"
-          onChange={(e) => setUserData({ ...userData, email: e.target.value })}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full max-w-xs input input-bordered"
-          onChange={(e) =>
-            setUserData({ ...userData, password: e.target.value })
-          }
-        />
-        <button
-          className="btn btn-wide bg-[#0166FF] text-white"
-          onClick={logIn}
-        >
-          Log in
-        </button>
+    <div className="flex flex-row">
+      <div className="flex flex-col items-center justify-center w-1/2 h-screen gap-10">
+        <Image src="./logo.svg" width={90} height={25} alt="Logo" />
+        <h2>Welcome Back</h2>
+        <div className="flex flex-col gap-4">
+          <input
+            type="text"
+            placeholder="Email"
+            className="w-full max-w-xs input input-bordered"
+            onChange={(e) =>
+              setUserData({ ...userData, email: e.target.value })
+            }
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full max-w-xs input input-bordered"
+            onChange={(e) =>
+              setUserData({ ...userData, password: e.target.value })
+            }
+          />
+          <button
+            className="btn btn-wide bg-[#0166FF] text-white"
+            onClick={logIn}
+          >
+            Log in
+          </button>
+        </div>
+        <div>
+          <span>Don’t have account?</span>
+          <Link href="/signup">
+            <button className="btn btn-link">Sign up</button>
+          </Link>
+        </div>
       </div>
-      <div>
-        <span>Don’t have account?</span>
-        <Link href="/signup">
-          <button className="btn btn-link">Sign up</button>
-        </Link>
-      </div>
+      <div className="w-1/2 h-screen bg-[#0166FF]"></div>
     </div>
   );
 };
