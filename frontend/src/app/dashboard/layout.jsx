@@ -6,24 +6,24 @@ import { useRouter } from "next/navigation";
 import { Header } from "../components";
 
 const Layout = ({ children }) => {
-	const { user, fetchUserData } = useContext(UserContext);
-	const router = useRouter();
+  const { user, fetchUserData } = useContext(UserContext);
+  const router = useRouter();
 
-	useEffect(() => {
-		fetchUserData();
-	}, []);
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
-	const logOut = () => {
-		localStorage.removeItem("token");
-		router.push("/login");
-	};
+  const logOut = () => {
+    localStorage.removeItem("token");
+    router.push("/login");
+  };
 
-	return (
-		<div>
-			<Header user={user} logOut={logOut} />
-			{children}
-		</div>
-	);
+  return (
+    <div>
+      <Header user={user} logOut={logOut} />
+      {children}
+    </div>
+  );
 };
 
 export default Layout;
