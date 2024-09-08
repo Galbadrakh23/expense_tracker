@@ -6,6 +6,16 @@ const getAllRecords = async (req, res) => {
   res.status(200).json({ message: "Амжилттай", user: data });
 };
 
+const getinfo = async (req, res) => {
+  try {
+    const [incomes, expenses] =
+      await sql`SELECT transaction_type, SUM(amount) FROM records GROUP BY transaction_type;`;
+    res.status(200).json({ incomes, expenses });
+  } catch (error) {
+    res.status(400).json({ message: "Алдаа гарлаа", error });
+  }
+};
+
 const createRecords = async (req, res) => {
   const { email, name, password, profile_img } = req.body;
 
@@ -41,4 +51,10 @@ const deleteRecords = async (req, res) => {
   res.status(200).json({ message: "Delete success", user: data });
 };
 
-module.exports = { getAllRecords, createRecords, updateRecords, deleteRecords };
+module.exports = {
+  getAllRecords,
+  createRecords,
+  updateRecords,
+  deleteRecords,
+  getinfo,
+};

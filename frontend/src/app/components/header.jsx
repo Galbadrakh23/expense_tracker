@@ -4,8 +4,8 @@ import Link from "next/link";
 
 export const Header = ({ user, logOut }) => {
   return (
-    <header className="flex items-center w-[1440px] justify-between py-4 bg-[#FFFFFF]">
-      <div className="flex gap-6 items-center mx-[120px]">
+    <header className="flex items-center w-full justify-between  py-4 px-[120px]">
+      <div className="flex gap-6 items-center">
         <Image src="/logo-2.svg" width={28} height={28} alt="logo" />
         <Link href="/dashboard">
           <p>
