@@ -6,6 +6,18 @@ import axios from "axios";
 import { apiUrl } from "../../../utils/util";
 import { toast } from "react-toastify";
 import HomeRecords from "../../components/home-records";
+import BarChart from "@/app/components/dashboard/BarChart";
+import {
+  ArcElement,
+  BarElement,
+  CategoryScale,
+  Chart,
+  Legend,
+  LinearScale,
+} from "chart.js";
+import DoughnurChart from "@/app/components/dashboard/Doughnut";
+
+Chart.register(CategoryScale, LinearScale, BarElement, ArcElement, Legend);
 
 const Dashboard = () => {
   const { user } = useContext(UserContext);
@@ -24,7 +36,7 @@ const Dashboard = () => {
   const getInfoCardData = async () => {
     try {
       const res = await axios.get(`${apiUrl}/records/info`);
-      console.log("ST", res.data);
+      console.log("Transaction Data", res.data);
       setCardInfo(res.data);
     } catch (error) {
       console.error(error);
@@ -35,7 +47,7 @@ const Dashboard = () => {
   useEffect(() => {
     fetchTransactions();
     getInfoCardData();
-  }, [user]);
+  }, [user?.id]);
 
   return (
     <div>
@@ -53,23 +65,15 @@ const Dashboard = () => {
         })}
         <div className="container mx-auto mt-6">
           <div className="container grid grid-cols-3 gap-4 mx-auto">
-            <div className="w-full h-[216px] rounded-xl bg-gradient-to-r from-[#0166FF] to-[#2F8FFF] shadow-lg">
+            <div className="w-full h-[216px] rounded-xl bg-gradient-to-r from-[#0166FF] to-[#2F8FFF] shadow-lg relative">
               <img
                 src="./geld-white.svg"
                 alt="logo"
                 className="relative top-8 left-8"
               />
-              <div className="text-white absolute top-60 pl-8">
+              <div className="text-white pt-24 pl-8">
                 <p className="opacity-50 font-normal">Cash</p>
-                <span className="font-medium">10,000,00</span>
-              </div>
-              <div className="relative top-2 left-72">
-                <img src="Shape.svg" alt="shape" className="opacity-80" />
-                <img
-                  src="nfc.svg"
-                  alt="nfc"
-                  className="w-10 h-10 absolute top-28 left-32"
-                />
+                <span className="font-normal"> ₮ 10,000,000</span>
               </div>
             </div>
             {/* INC */}
@@ -95,7 +99,6 @@ const Dashboard = () => {
               </div>
               <div className="flex flex-col py-[10px] px-6">
                 <p className="font-semibold text-3xl py-2">
-                  {" "}
                   {cardInfo?.expenses.sum}₮
                 </p>
                 <p className="font-thin text-sm py-2">Your expense Amount</p>
@@ -107,58 +110,69 @@ const Dashboard = () => {
           </div>
           <div className="flex gap-6 mt-6">
             <div className="w-1/2 h-full rounded-xl border border-[#0166FF]">
-              <div className="flex gap-2 items-center py-4 px-6 border-b border-gray-200">
+              <div className="flex gap-2 items-center py-4 px-6 border-b border-gray-200 justify-between">
                 Income - Expense
+                <p className="font-thin"> Date </p>
               </div>
-              <div
+              <BarChart />
+              {/* <div
                 role="status"
-                class="w-full p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700"
+                className="w-full p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700"
               >
-                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2.5"></div>
-                <div class="w-48 h-2 mb-10 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-                <div class="flex items-baseline mt-4">
-                  <div class="w-full bg-gray-200 rounded-t-lg h-72 dark:bg-gray-700"></div>
-                  <div class="w-full h-56 ms-6 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                  <div class="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
-                  <div class="w-full h-64 ms-6 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                  <div class="w-full bg-gray-200 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
-                  <div class="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
-                  <div class="w-full bg-gray-200 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
+                <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2.5"></div>
+                <div className="w-48 h-2 mb-10 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                <div className="flex items-baseline mt-4">
+                  <div className="w-full bg-gray-200 rounded-t-lg h-72 dark:bg-gray-700"></div>
+                  <div className="w-full h-56 ms-6 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                  <div className="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
+                  <div className="w-full h-64 ms-6 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                  <div className="w-full bg-gray-200 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
+                  <div className="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
+                  <div className="w-full bg-gray-200 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
                 </div>
-                <span class="sr-only">Loading...</span>
-              </div>
+                <span className="sr-only">Loading...</span>
+              </div> */}
             </div>
-            <div className="w-1/2 h-full rounded-xl border border-[#0166FF]">
+            {/* <div className="w-1/2 h-full rounded-xl border border-[#0166FF]">
               <div className="flex justify-between gap-2 items-center py-4 px-6 border-b border-gray-200">
                 <p> Income - Expense</p>
                 <p className="font-thin"> Jun 1 - Nov 30</p>
               </div>
               <div
                 role="status"
-                class="w-full p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700"
+                className="w-full p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700"
               >
-                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2.5"></div>
-                <div class="w-48 h-2 mb-10 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-                <div class="flex items-baseline mt-4">
-                  <div class="w-full bg-gray-200 rounded-t-lg h-72 dark:bg-gray-700"></div>
-                  <div class="w-full h-56 ms-6 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                  <div class="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
-                  <div class="w-full h-64 ms-6 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                  <div class="w-full bg-gray-200 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
-                  <div class="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
-                  <div class="w-full bg-gray-200 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
+                <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2.5"></div>
+                <div className="w-48 h-2 mb-10 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                <div className="flex items-baseline mt-4">
+                  <div className="w-full bg-gray-200 rounded-t-lg h-72 dark:bg-gray-700"></div>
+                  <div className="w-full h-56 ms-6 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                  <div className="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
+                  <div className="w-full h-64 ms-6 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                  <div className="w-full bg-gray-200 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
+                  <div className="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
+                  <div className="w-full bg-gray-200 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
                 </div>
-                <span class="sr-only">Loading...</span>
+                <span className="sr-only">Loading...</span>
               </div>
+            </div> */}
+            <div className="w-1/2 h-full rounded-xl border border-[#0166FF]">
+              <div className="flex gap-2 items-center py-4 px-6 border-b border-gray-200 justify-between">
+                Income - Expense
+                <p className="font-thin"> Jun 1 - Nov 30 </p>
+              </div>
+
+              <DoughnurChart />
             </div>
           </div>
 
           <div className="mt-6" />
           <div className="w-full h-[full] rounded-xl border border-[#0166FF]">
             <div className="flex justify-between gap-2 items-center py-4 px-6 border-b border-gray-200">
-              <p className="font-semibold">Last Records</p>
-              <p className="font-thin"> Jun 1 - Nov 30</p>
+              <span className="font-semibold">Last Records</span>
+              <span className="font-thin"> Jun 1 - Nov 30</span>
             </div>
+            {/*Records дууссаны дараа map ашиглах*/}
             <HomeRecords />
             <HomeRecords />
             <HomeRecords />

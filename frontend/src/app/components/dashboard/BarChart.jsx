@@ -2,17 +2,17 @@ import { Bar } from "react-chartjs-2";
 
 const BarChart = ({ barChartData }) => {
   const data1 = {
-    labels: ["Jan"],
+    labels: ["Total"],
     datasets: [
       {
         label: "Income",
-        backgroundColor: "#22C55E",
-        data: [20_000],
+        backgroundColor: "#84CC16",
+        data: [100_000],
       },
       {
         label: "Expense",
-        backgroundColor: "#F87171",
-        data: [15_000],
+        backgroundColor: "#F97316",
+        data: [5000],
       },
     ],
   };

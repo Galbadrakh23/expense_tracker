@@ -4,7 +4,7 @@ const RecordsModal = () => {
   return (
     <div
       id="expenseModal"
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black bg-opacity-50 items-center justify-center hidden z-50"
     >
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full relative">
         <span className="close absolute top-2 right-3 text-gray-500 cursor-pointer">
