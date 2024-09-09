@@ -13,7 +13,7 @@ export const Header = ({ user, logOut }) => {
           </p>
         </Link>
         <Link href="/records">
-          <p>Records</p>
+          <p>{user?.name}</p>
         </Link>
       </div>
       <div className="flex gap-6 items-center">
@@ -23,8 +23,7 @@ export const Header = ({ user, logOut }) => {
         </button>
         <div className="avatar w-12 h-12">
           <div className="w-24 rounded-full">
-            {/* <img src={user?.profile_img} /> */}
-            <img src="https://randomuser.me/api/portraits/men/1.jpg" />
+            <img src={user?.profile_img} />
           </div>
         </div>
         <button className="btn btn-sm" onClick={logOut}>

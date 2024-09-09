@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
 
   const fetchUserData = async () => {
     try {
-      console.log("GET-USER");
+      console.log("GET-USER", user);
       const token = localStorage.getItem("token");
       const response = await axios.get(`${apiUrl}/users/profile`, {
         headers: {

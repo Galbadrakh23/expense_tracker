@@ -63,7 +63,7 @@ const Dashboard = () => {
                 <p className="opacity-50 font-normal">Cash</p>
                 <span className="font-medium">10,000,00</span>
               </div>
-              <div className="absolute top-36 left-[400px]">
+              <div className="relative top-2 left-72">
                 <img src="Shape.svg" alt="shape" className="opacity-80" />
                 <img
                   src="nfc.svg"
