@@ -16,6 +16,31 @@ const getinfo = async (req, res) => {
   }
 };
 
+const getAllChart = async (req, res) => {
+  try {
+    const donutChartData =
+      await sql`SELECT SUM(r.amount), c.name cat_name FROM records r 
+                INNER JOIN categories c ON r.cid=c.id 
+                WHERE r.transaction_type='EXP'
+                GROUP BY cat_name;`;
+    res.status(200).json({ message: "Success", donut: donutChartData });
+  } catch (error) {
+    res.status(400).json({ message: "Алдаа гарлаа", error });
+  }
+};
+const getBarChart = async (req, res) => {
+  try {
+    const barAllChart =
+      await sql`SELECT SUM(r.amount), c.name cat_name FROM records r 
+                INNER JOIN categories c ON r.cid=c.id 
+                WHERE r.transaction_type='EXP'
+                GROUP BY cat_name;`;
+    res.status(200).json({ message: "Success", bar: barAllChart });
+  } catch (error) {
+    res.status(400).json({ message: "Алдаа гарлаа", error });
+  }
+};
+
 const createRecords = async (req, res) => {
   const { email, name, password, profile_img } = req.body;
 
@@ -57,4 +82,6 @@ module.exports = {
   updateRecords,
   deleteRecords,
   getinfo,
+  getAllChart,
+  getBarChart,
 };
