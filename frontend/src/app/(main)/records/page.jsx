@@ -20,12 +20,12 @@ const Records = () => {
   };
   return (
     <div>
-      <div className="container grid grid-cols-3 mx-[120px] mt-6 gap-2">
-        <div className="container rounded-lg w-full h-screen flex flex-col gap-6 bg-slate-100 py-4 px-4">
+      <div className="container grid grid-cols-3 mt-6 gap-2 bg py-4 mx-[120px] rounded-2xl">
+        <div className="container rounded-2xl w-full h-screen flex flex-col gap-6 bg-[#F9FAFB] border border-[#E5E7EB] py-4 mx-4 px-4">
           <p className="text-2xl font-medium">Records</p>
           <button
             onClick={handleOpen}
-            className="btn bg-[#0166FF] text-[#FFFFFF] font-normal text-base flex justify-center"
+            className="btn bg-[#0166FF] text-[#FFFFFF] font-normal text-base flex justify-center rounded-full"
           >
             <PlusIcon></PlusIcon> Add
           </button>
@@ -49,9 +49,15 @@ const Records = () => {
               </button>
             </div>
             {/*Map*/}
-            <div className="flex items-center gap-2">
-              <FaEye />
-              Food & Drinks
+            <div className="flex flex-col gap-4 mx-4">
+              <div className="flex items-center gap-2">
+                <FaEye />
+                Food & Drinks
+              </div>
+              <div className="flex items-center gap-2">
+                <FaEye />
+                Shopping
+              </div>
             </div>
           </div>
         </div>
@@ -67,11 +73,11 @@ const Records = () => {
             </button>
           </div>
           <div className="flex flex-col mt-6">
-            <div className="flex flex-col w-[664px]">
+            <div className="flex flex-col w-[664px] px-4">
               <span className="font-medium text-xl">Today</span>
               <HomeRecords />
             </div>
-            <div className="flex flex-col w-[664px] mt-4">
+            <div className="flex flex-col w-[664px] mt-4 px-4">
               <span className="font-medium text-xl">Yesterday</span>
               <HomeRecords />
             </div>

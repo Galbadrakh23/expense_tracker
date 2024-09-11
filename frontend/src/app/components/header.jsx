@@ -1,10 +1,21 @@
 import { PlusIcon } from "@/icons";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import RecordsModal from "./records-modal";
 
 export const Header = ({ user, logOut }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
   return (
-    <header className="flex items-center max-w-full justify-between  py-4 px-[120px]">
+    <header className="flex items-center max-w-full justify-between py-4 px-[120px] bg-[#FFFFFF]">
       <div className="flex gap-6 items-center">
         <Image src="/logo-2.svg" width={28} height={28} alt="logo" />
         <Link href="/dashboard">
@@ -18,10 +29,14 @@ export const Header = ({ user, logOut }) => {
       </div>
       <div className="flex gap-6 items-center">
         <Link href="/records">
-          <button className="btn bg-[#0166FF] text-white btn-sm">
+          <button
+            onClick={handleOpen}
+            className="btn bg-[#0166FF] text-white btn-sm"
+          >
             <PlusIcon />
             Records
           </button>
+          <RecordsModal isOpen={open} onClose={handleClose} />
         </Link>
         <div className="avatar w-12 h-12">
           <div className="w-24 rounded-full">

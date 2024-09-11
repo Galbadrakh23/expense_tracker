@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div>
+    <div className="bg-[#F3F4F6]">
       <Header user={user} logOut={logOut} />
       {children}
     </div>

@@ -23,6 +23,7 @@ const Dashboard = () => {
   const { user } = useContext(UserContext);
   const [transactionData, setTransactionData] = useState([]);
   const [cardInfo, setCardInfo] = useState(null);
+  const [barInfo, setBarInfo] = useState(null);
 
   const fetchTransactions = async () => {
     try {
@@ -43,10 +44,21 @@ const Dashboard = () => {
       toast.error("Failed to fetch transactions");
     }
   };
+  const getBarChartData = async () => {
+    try {
+      const res = await axios.get(`${apiUrl}/records/bar`);
+      console.log("Bar Data", res.data);
+      setBarInfo(res.data);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to fetch transactions");
+    }
+  };
 
   useEffect(() => {
     fetchTransactions();
     getInfoCardData();
+    getBarChartData();
   }, [user?.id]);
 
   return (
@@ -109,12 +121,12 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="flex gap-6 mt-6">
-            <div className="w-1/2 h-full rounded-xl border border-[#0166FF]">
+            <div className="w-full h-full rounded-xl border border-[#0166FF]">
               <div className="flex gap-2 items-center py-4 px-6 border-b border-gray-200 justify-between">
                 Income - Expense
                 <p className="font-thin"> Date </p>
               </div>
-              <BarChart />
+              <BarChart barInfo={barInfo} />
               {/* <div
                 role="status"
                 className="w-full p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700"
@@ -156,7 +168,7 @@ const Dashboard = () => {
                 <span className="sr-only">Loading...</span>
               </div>
             </div> */}
-            <div className="w-1/2 h-full rounded-xl border border-[#0166FF]">
+            <div className="w-full h-full rounded-xl border border-[#0166FF]">
               <div className="flex gap-2 items-center py-4 px-6 border-b border-gray-200 justify-between">
                 Income - Expense
                 <p className="font-thin"> Jun 1 - Nov 30 </p>

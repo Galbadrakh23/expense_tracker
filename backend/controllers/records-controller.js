@@ -30,12 +30,14 @@ const getAllChart = async (req, res) => {
 };
 const getBarChart = async (req, res) => {
   try {
-    const barAllChart =
-      await sql`SELECT SUM(r.amount), c.name cat_name FROM records r 
-                INNER JOIN categories c ON r.cid=c.id 
-                WHERE r.transaction_type='EXP'
-                GROUP BY cat_name;`;
-    res.status(200).json({ message: "Success", bar: barAllChart });
+    const barAllChart = await sql`  
+         SELECT TO_CHAR(DATE_TRUNC('month', r.createdAt), 'Mon') as month,
+          SUM(CASE WHEN r.transaction_type = 'INC' THEN r.amount ELSE 0 END) AS total_income,
+          SUM(CASE WHEN r.transaction_type = 'EXP' THEN r.amount ELSE 0 END) AS total_expense
+          FROM records r
+          GROUP BY DATE_TRUNC('month',r.createdAt)
+          ORDER BY DATE_TRUNC('month', r.createdAt);`;
+    res.status(200).json({ bar: barAllChart });
   } catch (error) {
     res.status(400).json({ message: "Алдаа гарлаа", error });
   }
