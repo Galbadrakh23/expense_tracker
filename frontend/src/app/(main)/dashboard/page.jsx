@@ -27,7 +27,12 @@ const Dashboard = () => {
 
   const fetchTransactions = async () => {
     try {
-      const res = await axios.get(`${apiUrl}/records`);
+      const res = await axios.get(`${apiUrl}/records`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
       setTransactionData(res.data);
     } catch (error) {
       console.error(error);
@@ -36,7 +41,11 @@ const Dashboard = () => {
   };
   const getInfoCardData = async () => {
     try {
-      const res = await axios.get(`${apiUrl}/records/info`);
+      const res = await axios.get(`${apiUrl}/records/info`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       console.log("Transaction Data", res.data);
       setCardInfo(res.data);
     } catch (error) {

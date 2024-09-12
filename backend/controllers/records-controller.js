@@ -9,7 +9,9 @@ const getAllRecords = async (req, res) => {
 const getinfo = async (req, res) => {
   try {
     const [incomes, expenses] =
-      await sql`SELECT transaction_type, SUM(amount) FROM records GROUP BY transaction_type;`;
+      await sql`SELECT ID, name, transaction_type, SUM(amount) 
+                FROM records 
+                GROUP BY  name , ID, transaction_type;`;
     res.status(200).json({ incomes, expenses });
   } catch (error) {
     res.status(400).json({ message: "Алдаа гарлаа", error });
@@ -44,12 +46,12 @@ const getBarChart = async (req, res) => {
 };
 
 const createRecords = async (req, res) => {
-  const { email, name, password, profile_img } = req.body;
+  const { uid, cid, name, amount, transaction_type, description } = req.body;
 
   try {
     const data = await sql`
-      INSERT INTO records (email, name, password, profile_img )
-      VALUES ( ${email}, ${name}, ${password}, ${profile_img} )
+    INSERT INTO records (uid, cid, name, amount, transaction_type, description)
+    VALUES ( ${uid}, ${cid}, ${name}, ${amount}, ${transaction_type}, ${description})
       RETURNING *;
     `;
     res.status(201).json({ message: "Create success", user: data[0] });

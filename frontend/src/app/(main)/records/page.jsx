@@ -18,6 +18,7 @@ const Records = () => {
   const handleOpen = () => {
     setOpen(true);
   };
+
   return (
     <div>
       <div className="container grid grid-cols-3 mt-6 gap-2 bg py-4 mx-[120px] rounded-2xl">
