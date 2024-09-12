@@ -8,6 +8,7 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [record, setRecord] = useState(null);
 
   const fetchUserData = async () => {
     try {
@@ -27,6 +28,24 @@ export const UserProvider = ({ children }) => {
       console.error("Error fetching user data:", error);
     }
   };
+  // const fetchRecordData = async () => {
+  //   try {
+  //     console.log("Record", record);
+  //     const token = localStorage.getItem("token");
+  //     const response = await axios.get(`${apiUrl}/records/profile`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+
+  //     if (response.status === 200) {
+  //       setRecord(response.data.record);
+  //       console.log("USER", response.record);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching user data:", error);
+  //   }
+  // };
 
   useEffect(() => {
     if (!user) {

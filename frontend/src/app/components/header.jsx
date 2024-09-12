@@ -19,13 +19,16 @@ export const Header = ({ user, logOut }) => {
       <div className="flex gap-6 items-center">
         <Image src="/logo-2.svg" width={28} height={28} alt="logo" />
         <Link href="/dashboard">
-          <p>
+          <p className="hover:text-sky-500">
             <strong>Dashboard</strong>
           </p>
         </Link>
         <Link href="/records">
-          <p>{user?.name}</p>
+          <p className="hover:text-sky-500">Records</p>
         </Link>
+        <p>
+          User: <strong>{user?.name}</strong>
+        </p>
       </div>
       <div className="flex gap-6 items-center">
         <Link href="/records">

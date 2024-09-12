@@ -46,12 +46,12 @@ const getBarChart = async (req, res) => {
 };
 
 const createRecords = async (req, res) => {
-  const { uid, cid, name, amount, transaction_type, description } = req.body;
+  const { name, amount, description } = req.body;
 
   try {
     const data = await sql`
-    INSERT INTO records (uid, cid, name, amount, transaction_type, description)
-    VALUES ( ${uid}, ${cid}, ${name}, ${amount}, ${transaction_type}, ${description})
+    INSERT INTO records (name, amount, description)
+    VALUES ( ${name}, ${amount}, ${description})
       RETURNING *;
     `;
     res.status(201).json({ message: "Create success", user: data[0] });
@@ -79,6 +79,12 @@ const deleteRecords = async (req, res) => {
   console.log("DATA", data);
   res.status(200).json({ message: "Delete success", user: data });
 };
+// const getCurrentRecord = async (req, res) => {
+//   const { id } = req.record;
+//   const [data] = await sql`SELECT * FROM users WHERE id=${id}`;
+
+//   res.status(200).json({ message: "success", record: data });
+// };
 
 module.exports = {
   getAllRecords,
