@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { apiUrl } from "@/utils/util";
 
 const Login = () => {
+  console.log("API_URL", apiUrl);
   const router = useRouter();
   const [userData, setUserData] = useState({
     email: "",
