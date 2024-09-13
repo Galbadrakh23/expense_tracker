@@ -1,10 +1,12 @@
 import { PlusIcon } from "@/icons";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import RecordsModal from "./records-modal";
+import { UserContext } from "../context/user-context";
 
-export const Header = ({ user, logOut }) => {
+export const Header = () => {
+  const { user, fetchUserData } = useContext(UserContext);
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -14,6 +16,11 @@ export const Header = ({ user, logOut }) => {
   const handleOpen = () => {
     setOpen(true);
   };
+  const logOut = () => {
+    localStorage.removeItem("token");
+    router.push("/login");
+  };
+
   return (
     <header className="flex items-center max-w-full justify-between py-4 px-[120px] bg-[#FFFFFF]">
       <div className="flex gap-6 items-center">
