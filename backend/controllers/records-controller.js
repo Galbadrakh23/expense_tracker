@@ -3,15 +3,14 @@ const sql = require("../config/db");
 const getAllRecords = async (req, res) => {
   const data = await sql`SELECT * FROM records`;
   console.log("DATA", data);
-  res.status(200).json({ message: "Амжилттай", user: data });
+  res.status(200).json({ message: "Бүх рекордс амжилттай", user: data });
 };
 
-const getinfo = async (req, res) => {
+const getInfo = async (req, res) => {
   try {
-    const [incomes, expenses] =
-      await sql`SELECT ID, name, transaction_type, SUM(amount) 
+    const [incomes, expenses] = await sql`SELECT transaction_type, SUM(amount) 
                 FROM records 
-                GROUP BY  name , ID, transaction_type;`;
+                GROUP BY transaction_type;`;
     res.status(200).json({ incomes, expenses });
   } catch (error) {
     res.status(400).json({ message: "Алдаа гарлаа", error });
@@ -46,12 +45,12 @@ const getBarChart = async (req, res) => {
 };
 
 const createRecords = async (req, res) => {
-  const { name, amount, description } = req.body;
+  const { name, amount, transaction_type, description } = req.body;
 
   try {
     const data = await sql`
-    INSERT INTO records (name, amount, description)
-    VALUES ( ${name}, ${amount}, ${description})
+    INSERT INTO records (name, amount, transaction_type, description)
+    VALUES ( ${name}, ${amount},${transaction_type} ,${description})
       RETURNING *;
     `;
     res.status(201).json({ message: "Create success", user: data[0] });
@@ -91,7 +90,7 @@ module.exports = {
   createRecords,
   updateRecords,
   deleteRecords,
-  getinfo,
+  getInfo,
   getAllChart,
   getBarChart,
 };

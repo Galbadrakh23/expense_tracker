@@ -4,7 +4,7 @@ const {
   createRecords,
   updateRecords,
   deleteRecords,
-  getinfo,
+  getInfo,
   getAllChart,
   getBarChart,
 } = require("../controllers/records-controller");
@@ -12,7 +12,7 @@ const {
 const router = Router();
 
 router.route("/bar").get(getBarChart);
-router.route("/info").get(getinfo);
+router.route("/info").get(getInfo);
 router.route("/chart").get(getAllChart);
 router.route("/").get(getAllRecords);
 

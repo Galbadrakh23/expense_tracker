@@ -36,7 +36,7 @@ const RecordsModal = ({ isOpen, onClose }) => {
     try {
       const response = await axios.post(`${apiUrl}/records`, userData);
       if (response.status === 201) {
-        toast.success("Record successfully created", { autoClose: 500 });
+        toast.success("Record successfully created", { autoClose: 1000 });
         onClose();
       }
     } catch (error) {
@@ -61,11 +61,8 @@ const RecordsModal = ({ isOpen, onClose }) => {
               </button>
             </div>
             <div className="flex p-6 shadow-lg bg-white max-w-3xl w-full rounded-b-xl relative">
-              {/* Modal Content */}
               <div className="w-full flex flex-row">
-                {/* Left Column (Amount, Category, Date, Time) */}
                 <div className="w-1/2 flex flex-col pr-4">
-                  {/* Tabs for Expense/Income */}
                   <div className="flex justify-between mb-6">
                     <button
                       id="expenseTab"
@@ -215,11 +212,10 @@ const RecordsModal = ({ isOpen, onClose }) => {
                       Note
                     </label>
                     <textarea
-                      id="note"
-                      name="note"
-                      value={userData.note}
+                      type="text"
+                      value={userData.description}
                       onChange={handleChange}
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      className="mt-1 block w-full h-[230px] px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                       placeholder="Write here"
                     />
                   </div>

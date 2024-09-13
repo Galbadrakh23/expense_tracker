@@ -1,6 +1,10 @@
-import React from "react";
+import { DashboardContext } from "@/app/context/dashboard-context";
+import React, { useContext } from "react";
 
-const Cards = ({ cardInfo }) => {
+const Cards = () => {
+  const { cardInfo } = useContext(DashboardContext);
+  // console.log("Card info ", expenses);
+
   return (
     <div>
       <div className="container grid grid-cols-3 gap-4 mx-auto">

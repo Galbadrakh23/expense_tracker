@@ -5,8 +5,9 @@ import React from "react";
 import { FaEye } from "react-icons/fa";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { PlusIcon } from "@/icons";
-import HomeRecords from "@/app/components/home-records";
 import { useState } from "react";
+import Expenses from "@/app/components/expenses";
+import IncomeRecords from "@/app/components/Income-data";
 
 const Records = () => {
   const [open, setOpen] = useState(false);
@@ -76,11 +77,11 @@ const Records = () => {
           <div className="flex flex-col mt-6">
             <div className="flex flex-col w-[664px] px-4">
               <span className="font-medium text-xl">Today</span>
-              <HomeRecords />
+              <Expenses />
             </div>
             <div className="flex flex-col w-[664px] mt-4 px-4">
               <span className="font-medium text-xl">Yesterday</span>
-              <HomeRecords />
+              <IncomeRecords />
             </div>
           </div>
         </div>

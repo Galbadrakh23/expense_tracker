@@ -27,8 +27,8 @@ export const DashboardProvider = ({ children }) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      console.log("Transaction Data", res.data.incomes, res.data.expenses);
-      setCardInfo({ incomes: res.data.incomes, expenses: res.data.expenses });
+      console.log("Transaction Data", res.data);
+      setCardInfo(res.data);
     } catch (error) {
       console.error(error);
       toast.error("Failed to fetch transactions");
@@ -45,8 +45,7 @@ export const DashboardProvider = ({ children }) => {
       value={{
         bar: chartData?.bar,
         donut: chartData?.donut,
-        incomes: cardInfo?.incomes,
-        expenses: cardInfo?.expenses,
+        cardInfo,
       }}
     >
       {children}
