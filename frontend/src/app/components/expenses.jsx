@@ -15,8 +15,10 @@ const Expenses = () => {
         </span>
         <div className="py-2">
           {recordInfo?.expenses?.transaction_type}
-          <p className="font-thin text-sm">3 hours ago</p>
-          <p className="font-thin text-sm">{recordsData?.name}</p>
+          <p className="font-thin text-sm">{recordsData?.recordsData?.name}</p>
+          <p className="font-thin text-sm">
+            {recordsData?.recordsData?.description}
+          </p>
         </div>
       </div>
       <span className="text-[#F54949]"> {recordInfo?.expenses?.sum}₮</span>

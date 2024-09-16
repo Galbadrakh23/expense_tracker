@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { RecordsContext } from "../context/record-context";
 
 const IncomeRecords = () => {
-  const { recordInfo } = useContext(RecordsContext);
+  const { recordInfo, recordsData } = useContext(RecordsContext);
 
   return (
     <div className="flex justify-between gap-2 items-center py-4 px-6 border-b border-gray-200">
@@ -13,6 +13,9 @@ const IncomeRecords = () => {
         <div className="py-2">
           {recordInfo?.incomes?.transaction_type}
           <p className="font-thin text-sm">3 hours ago</p>
+          <p className="font-thin text-sm">
+            {recordsData?.recordsData?.description}
+          </p>
         </div>
       </div>
       <span className="text-[#23E01F]"> {recordInfo?.incomes?.sum}₮</span>

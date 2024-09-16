@@ -4,10 +4,12 @@ import Link from "next/link";
 import { useState, useContext } from "react";
 import RecordsModal from "./records-modal";
 import { UserContext } from "../context/user-context";
+import { useRouter } from "next/navigation";
 
 export const Header = () => {
   const { user, fetchUserData } = useContext(UserContext);
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
   const handleClose = () => {
     setOpen(false);

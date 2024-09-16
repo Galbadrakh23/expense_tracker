@@ -4,7 +4,7 @@ const {
   createRecords,
   updateRecords,
   deleteRecords,
-  getInfo,
+  getTransaction,
   getAllChart,
   getBarChart,
   getRecords,
@@ -14,7 +14,7 @@ const {
 const router = Router();
 
 router.route("/bar").get(getBarChart);
-router.route("/info").get(getInfo);
+router.route("/transaction").get(getTransaction);
 router.route("/default").get(getRecords);
 router.route("/information").get(getRecordsDefault);
 router.route("/chart").get(getAllChart);

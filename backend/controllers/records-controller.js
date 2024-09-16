@@ -6,7 +6,7 @@ const getAllRecords = async (req, res) => {
   res.status(200).json({ message: "Бүх рекордс амжилттай", user: data });
 };
 
-const getInfo = async (req, res) => {
+const getTransaction = async (req, res) => {
   try {
     const [incomes, expenses] = await sql`SELECT transaction_type, SUM(amount) 
                 FROM records 
@@ -110,7 +110,7 @@ module.exports = {
   createRecords,
   updateRecords,
   deleteRecords,
-  getInfo,
+  getTransaction,
   getAllChart,
   getBarChart,
   getRecords,
