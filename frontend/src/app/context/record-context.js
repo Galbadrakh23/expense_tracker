@@ -9,6 +9,7 @@ export const RecordsContext = createContext();
 export const RecordsProvider = ({ children }) => {
   const [record, setRecord] = useState(null);
   const [recordInfo, setRecordInfo] = useState(null);
+  const [recordsData, setRecordsData] = useState(null);
 
   const fetchRecordData = async () => {
     try {
@@ -28,9 +29,9 @@ export const RecordsProvider = ({ children }) => {
       console.error("Error fetching user data:", error);
     }
   };
-  const getRecordData = async () => {
+  const getRecordTransaction = async () => {
     try {
-      const res = await axios.get(`${apiUrl}/records/info`, {
+      const res = await axios.get(`${apiUrl}/records/default`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -43,13 +44,31 @@ export const RecordsProvider = ({ children }) => {
     }
   };
 
+  const getRecordsDefault = async () => {
+    try {
+      const res = await axios.get(`${apiUrl}/records/information`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      console.log("setRecordsData", res.data);
+      setRecordsData(res.data);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to fetch transactions");
+    }
+  };
+
   useEffect(() => {
     fetchRecordData();
-    getRecordData();
+    getRecordTransaction();
+    getRecordsDefault;
   }, []);
 
   return (
-    <RecordsContext.Provider value={{ fetchRecordData, recordInfo }}>
+    <RecordsContext.Provider
+      value={{ fetchRecordData, recordInfo, recordsData }}
+    >
       {children}
     </RecordsContext.Provider>
   );

@@ -21,66 +21,71 @@ const Records = () => {
   };
 
   return (
-    <div>
-      <div className="container grid grid-cols-3 mt-6 gap-2 bg py-4 mx-[120px] rounded-2xl">
-        <div className="container rounded-2xl w-full h-screen flex flex-col gap-6 bg-[#F9FAFB] border border-[#E5E7EB] py-4 mx-4 px-4">
-          <p className="text-2xl font-medium">Records</p>
+    <div className="flex flex-col h-screen mx-[120px] pt-8">
+      {/* Sidebar */}
+      <div className="flex gap-6">
+        <div className="bg-[#F9FAFB] border border-[#E5E7EB] p-6 rounded-lg h-full w-1/4">
+          <p className="text-2xl font-medium mb-6">Records</p>
           <button
             onClick={handleOpen}
-            className="btn bg-[#0166FF] text-[#FFFFFF] font-normal text-base flex justify-center rounded-full"
+            className="bg-[#0166FF] text-white text-base py-2 px-4 rounded-full flex items-center justify-center gap-2"
           >
-            <PlusIcon></PlusIcon> Add
+            <PlusIcon /> Add
           </button>
           <RecordsModal isOpen={open} onClose={handleClose} />
           <input
             type="text"
-            placeholder="  Search"
-            className="py-2 rounded-lg"
+            placeholder="Search"
+            className="w-full py-2 px-4 rounded-lg mt-4 border border-gray-300"
           />
-          <div className="flex flex-col gap-6">
+          <div className="mt-6">
             <h1 className="font-semibold">Type</h1>
-            <div>All</div>
-            <div>Income</div>
-            <div>Expense</div>
+            <div className="mt-2 text-base">All</div>
+            <div className="text-base">Income</div>
+            <div className="text-base">Expense</div>
           </div>
-          <div className="flex flex-col gap-6">
+          <div className="mt-6">
             <div className="flex justify-between items-center">
               <h1 className="font-semibold">Category</h1>
-              <button className="btn bg-none font-normal opacity-50">
-                Clear
-              </button>
+              <button className="text-sm opacity-50">Clear</button>
             </div>
-            {/*Map*/}
-            <div className="flex flex-col gap-4 mx-4">
+            <div className="mt-4">
               <div className="flex items-center gap-2">
-                <FaEye />
-                Food & Drinks
+                <FaEye className="text-gray-400" />
+                <span>Food & Drinks</span>
               </div>
-              <div className="flex items-center gap-2">
-                <FaEye />
-                Shopping
+              <div className="flex items-center gap-2 mt-2">
+                <FaEye className="text-gray-400" />
+                <span>Shopping</span>
               </div>
+              {/* Add more categories as needed */}
             </div>
           </div>
         </div>
 
-        <div className="w-full pl-8 justify-between">
-          <div className="flex items-center gap-4">
-            <button className="btn btn-square">
-              <SlArrowLeft />
-            </button>
-            Last 30 Days
-            <button className="btn btn-square">
-              <SlArrowRight />
-            </button>
+        {/* Main content */}
+        <div className="w-3/4">
+          <div className="flex justify-between items-center mb-4">
+            <div className="flex items-center gap-4">
+              <button className="p-2 border rounded-full">
+                <SlArrowLeft />
+              </button>
+              <span>Last 30 Days</span>
+              <button className="p-2 border rounded-full">
+                <SlArrowRight />
+              </button>
+            </div>
+            <p className="text-[#0166FF] font-normal">Newest first</p>
           </div>
-          <div className="flex flex-col mt-6">
-            <div className="flex flex-col w-[664px] px-4">
-              <span className="font-medium text-xl">Today</span>
+
+          {/* Records */}
+          <div className="border-t pt-6">
+            <div className="mb-6">
+              <h2 className="font-medium text-lg">Today</h2>
               <Expenses />
             </div>
-            <div className="flex flex-col w-[664px] mt-4 px-4">
-              <span className="font-medium text-xl">Yesterday</span>
+            <div>
+              <h2 className="font-medium text-lg">Yesterday</h2>
               <IncomeRecords />
             </div>
           </div>

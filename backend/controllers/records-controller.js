@@ -11,7 +11,27 @@ const getInfo = async (req, res) => {
     const [incomes, expenses] = await sql`SELECT transaction_type, SUM(amount) 
                 FROM records 
                 GROUP BY transaction_type;`;
-    res.status(200).json({ incomes, expenses });
+    res.status(200).json({ message: "Transaction Data", incomes, expenses });
+  } catch (error) {
+    res.status(400).json({ message: "Алдаа гарлаа", error });
+  }
+};
+const getRecords = async (req, res) => {
+  try {
+    const [incomes, expenses] = await sql`SELECT transaction_type, SUM(amount) 
+                FROM records 
+                GROUP BY transaction_type;`;
+    res.status(200).json({ message: "Income & Expense", incomes, expenses });
+  } catch (error) {
+    res.status(400).json({ message: "Алдаа гарлаа", error });
+  }
+};
+
+const getRecordsDefault = async (req, res) => {
+  try {
+    const [recordsData] =
+      await sql`SELECT name , transaction_type, description FROM records`;
+    res.status(200).json({ message: "Record Data", recordsData });
   } catch (error) {
     res.status(400).json({ message: "Алдаа гарлаа", error });
   }
@@ -93,4 +113,6 @@ module.exports = {
   getInfo,
   getAllChart,
   getBarChart,
+  getRecords,
+  getRecordsDefault,
 };

@@ -7,12 +7,16 @@ const {
   getInfo,
   getAllChart,
   getBarChart,
+  getRecords,
+  getRecordsDefault,
 } = require("../controllers/records-controller");
 
 const router = Router();
 
 router.route("/bar").get(getBarChart);
 router.route("/info").get(getInfo);
+router.route("/default").get(getRecords);
+router.route("/information").get(getRecordsDefault);
 router.route("/chart").get(getAllChart);
 router.route("/").get(getAllRecords);
 
